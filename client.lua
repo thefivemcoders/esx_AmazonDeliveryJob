@@ -78,8 +78,9 @@ end
 
 Citizen.CreateThread(function()
 	while true do
-		Citizen.Wait(0)
+		local wait = 2000
 		if isInJobAmz == false then
+			wait = 0
 			DrawMarker(1,Amazn.x,Amazn.y,Amazn.z, 0, 0, 0, 0, 0, 0, 1.5001, 1.5001, 0.6001,255,255,51, 200, 0, 0, 0, 0)
 			if GetDistanceBetweenCoords(Amazn.x, Amazn.y, Amazn.z, GetEntityCoords(GetPlayerPed(-1),true)) < 1.5 then
 				drawTxt("PRESS E TO START THE DELIVERY",2, 1, 0.45, 0.03, 0.80,255,255,51,255)
@@ -100,6 +101,7 @@ Citizen.CreateThread(function()
 			end
 		end
 		if isToHouse == true then
+			wait = 0
 			destinol = casas[sigcasa].name
 			drawTxt("TAKE THE Truck AND HEAD TO "..destinol .." AND DELIVER THE Packages",4, 1, 0.45, 0.92, 0.70,255,255,255,255)
 			DrawMarker(1,casas[sigcasa].x,casas[sigcasa].y,casas[sigcasa].z, 0, 0, 0, 0, 0, 0, 1.5001, 1.5001, 0.6001,255,255,51, 200, 0, 0, 0, 0)
@@ -120,6 +122,7 @@ Citizen.CreateThread(function()
 			end
 		end
 		if isToDepot == true then
+			wait = 0
 			drawTxt("HEAD BACK TO THE Amazon Depot TO COLLECT YOUR MONEY",4, 1, 0.45, 0.92, 0.70,255,255,255,255)
 			DrawMarker(1,Amazn.x,Amazn.y,Amazn.z, 0, 0, 0, 0, 0, 0, 1.5001, 1.5001, 0.6001,255,255,51, 200, 0, 0, 0, 0)
 				if GetDistanceBetweenCoords(Amazn.x,Amazn.y,Amazn.z, GetEntityCoords(GetPlayerPed(-1),true)) < 3 then
@@ -149,6 +152,7 @@ Citizen.CreateThread(function()
 				end
 		end
 		if IsEntityDead(GetPlayerPed(-1)) then
+			wait = 0
 			 isInJobAmz = false
 			 sigcasa = 0
 			 isToHouse = false
@@ -158,6 +162,7 @@ Citizen.CreateThread(function()
 			 py = 0
 			 pz = 0
 		end
+		Citizen.Wait(wait)	
 	end
 end)
 
